@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoapp">
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>Angular Todo App</title>
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <script src="vendor/angular/angular.js"></script>
+  <script src="vendor/angular/angular-route.js"></script> 
+  <script src="angular-modal-service.js"></script>
+  <script src="todoapp.js"></script>
+  <script src="show/Showcontroller.js"></script>
+  <script src="edit/Editcontroller.js"></script>
+  
+</head>
+
+<body ng-app="todoapp" ng-controller="SampleController" data-spy="scroll" >
+ <div class="navbar navbar-inverse navbar-fixed-top" >
+ </div>
+ <!-- used for route -->
+ <div ng-view></div>
+ <p></p>
+ <div class="container text-center">
+  <div class="page-header">
+    <h1>Angular Todo List Project</h1>
+    <p class="lead">My Todos</p>
+  </div>
+</div>
+
+
+<!-- Todos input -->
+<div class="container" > 
+  <table class="table">
+    <tbody>
+      <tr class="info text-center">
+        <form role="form" ng-submit="addTodo()">
+          <div class="input-group">
+            <td width="15%"><input type="text" ng-model="newTodoTitle" placeholder="Title" class="form-control text-center" required> </div></td>
+            <td><input type="text" ng-model="newTodoNote" placeholder="What needs to be done?" class="form-control text-center" required></td>
+            <span class="input-group-btn">
+              <td width="25%" ><button type="submit" class="btn btn-primary btn-md " ><span class="glyphicon glyphicon-plus"></span> Add</button></td> </span>
+            </div></form>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <!-- Todos list -->
+    <div class="container" >
+     <p></p>                                          
+     <table class="table table-hover text-center">
+      <thead>
+        <tr>
+          <th class="text-center">#</th>
+          <th class="text-center">Title</th>
+          <th class="text-center">Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="todo in todos">
+          <td width="5%"><label for="index"><span class="badge">{{$index+1}}</span></label></td>
+          <td width="10%" ><label>{{todo.title}}</label></td>
+          <td ><label>{{todo.note}}</label></td>
+          <td width="25%"><div class="btn-group">
+            <a href="#/show/{{$index+1}}" class="btn btn-primary btn-md" role="button" ><span class="glyphicon glyphicon-eye-open"></span> Show</a>
+            <button class="btn btn-danger btn-md" ng-click="removeTodo($index)" aria-label="Remove"><span class="glyphicon glyphicon-remove"></span> Delete</button>
+            <a href="#/edit/{{$index+1}}" class="btn btn-warning btn-md" role="button" ><span class="glyphicon glyphicon-pencil" ng-click=""></span> Edit</a>
+          </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
